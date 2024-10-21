@@ -444,4 +444,5 @@ class Positive_sample_with_generated_mask(Dataset):
         mask[mask >= 0.5] = 1
         example["mask"] = mask
         example["name"]=self.name
+        example["mask_path"] = source_filename
         return example

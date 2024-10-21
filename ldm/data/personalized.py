@@ -345,6 +345,7 @@ class Positive_sample_with_generated_mask(Dataset):
     #return the normal samples for sample_name with a randomly chosen mask.
     def __init__(self,
                  mvtec_path,
+                 mask_root,
                  sample_name,
                  anomaly_name,
                  size=256,
@@ -362,7 +363,7 @@ class Positive_sample_with_generated_mask(Dataset):
                  ):
         self.name=sample_name + '+' + anomaly_name
         self.data_root = mvtec_path
-        self.mask_root='./generated_mask'
+        self.mask_root = mask_root
         self.img_path=os.path.join(self.data_root,sample_name,'train','good')
         self.mask_path=os.path.join(self.mask_root,sample_name,anomaly_name)
         img_files=os.listdir(self.img_path)

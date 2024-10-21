@@ -78,9 +78,17 @@ class EmbeddingManager(nn.Module):
         print(initializer_words)  # 是一个单词
         if per_image_tokens:
             placeholder_strings.extend(per_img_token_list)
+
         name_anomaly_file = 'name-anomaly.txt'
-        with open(name_anomaly_file,'r') as f:
-            sample_anomaly_pairs=f.read().split('\n')
+        try:
+            f = open(name_anomaly_file,'r')
+        except FileNotFoundError:
+            # our use case assumes anomalydiffusion is a submodule placed in lib/anomalydiffusion
+            name_anomaly_file = 'lib/anomalydiffusion/name-anomaly.txt'
+            f = open(name_anomaly_file,'r')
+        sample_anomaly_pairs=f.read().split('\n')
+        f.close()
+
         for name in sample_anomaly_pairs:
             for idx, placeholder_string in enumerate(placeholder_strings):
 

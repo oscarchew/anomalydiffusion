@@ -364,12 +364,17 @@ class Positive_sample_with_generated_mask(Dataset):
         self.name=sample_name + '+' + anomaly_name
         self.data_root = mvtec_path
         self.mask_root = mask_root
-        self.img_path=os.path.join(self.data_root,sample_name,'train','good')
-        self.mask_path=os.path.join(self.mask_root,sample_name,anomaly_name)
+
+        # original
+        # self.img_path=os.path.join(self.data_root,sample_name,'train','good')
+        # self.mask_path=os.path.join(self.mask_root,sample_name,anomaly_name)
+
+        # polly
+        self.img_path=os.path.join(self.data_root)
+        self.mask_path=os.path.join(self.mask_root)
+
         img_files=os.listdir(self.img_path)
         mask_files=os.listdir(self.mask_path)
-        # img_files.sort(key=lambda x:int(x[:3]))
-        # mask_files.sort(key=lambda x: int(x[:3]))
         self.img_files=[os.path.join(self.img_path,file_name) for file_name in img_files]
         self.mask_files=[os.path.join(self.mask_path,file_name) for file_name in mask_files]
         self.num_images = len(self.mask_files)
